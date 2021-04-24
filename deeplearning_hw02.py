@@ -27,7 +27,7 @@ from keras.engine.topology import Layer
 import matplotlib.pyplot as plt
 
 from PIL import Image
-from google.colab.patches import cv2_imshow
+#from google.colab.patches import cv2_imshow
 import os
 import zipfile
 
@@ -107,19 +107,8 @@ def get_siamese_model(input_shape):
     siamese_net = Model(inputs=[left_input,right_input],outputs=prediction)
     return siamese_net
 
-
-
-#unzip("/content/lfwa.zip")
-  dataset_path = "/content/lfw2/lfw2/" #the relative path inside my project folder
-  train_path = "/content/pairsDevTrain.txt"
-  test_path = "/content/pairsDevTest.txt"
-  shape = (105, 105, 1)
-  batch_size = 64
-  num_epochs = 50
-  check_test_acc = 1
-  index_in_data = 0
-  validation_split = 0.2
-  train_inputs, train_labels = build_pairs(dataset_path, train_path, shape)
+def get_batch(data, index, batch_size):
+  return np.array(data[index : index + batch_size])
 
 if __name__ == "__main__":
   #unzip("/content/lfwa.zip")
@@ -212,5 +201,3 @@ if __name__ == "__main__":
   #ax = plt.axes()
   #ax.plot(test_accs, epoch_indexes)
 
-def get_batch(data, index, batch_size):
-  return np.array(data[index : index + batch_size])
